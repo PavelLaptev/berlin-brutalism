@@ -1,9 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Big+Shoulders+Text:wght@900&family=IBM+Plex+Sans&display=swap");
+
+:root {
+  --clr-background: #cdd1c9;
+  --clr-main-light: #a8aba5;
+  --clr-main: #93978f;
+  --clr-main-dark: #7b8175;
+  --clr-black: #000;
+}
+
+html[data-theme="dark"] {
+  --clr-background: #343631;
+  --clr-main-light: #a8aba5;
+  --clr-main: #93978f;
+  --clr-main-dark: #7b8175;
+  --clr-black: #000;
+}
+
+html {
+  color-scheme: light;
+}
+
 html,
 body {
-  padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  padding: 0;
+  font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--clr-background);
 }
 
 a {
@@ -13,14 +39,4 @@ a {
 
 * {
   box-sizing: border-box;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
 }

@@ -1,0 +1,28 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 0 0 100px 0;
+}
+
+.name {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+}
+
+.berlinPin {
+  width: 140px;
+  height: 150px;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: clamp(3.63rem, 6.54vw + 2.11rem, 8rem);
+  line-height: 90%;
+  font-family: "Big Shoulders Text", sans-serif;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0;
+}

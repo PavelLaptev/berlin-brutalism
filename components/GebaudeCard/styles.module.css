@@ -1,0 +1,17 @@
+.card {
+  width: 100%;
+  height: 100vh;
+  max-height: 60vh;
+  border: 1px solid black;
+}
+
+.model {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.model iframe {
+  width: 100%;
+  height: 100%;
+}

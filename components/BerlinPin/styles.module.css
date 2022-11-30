@@ -1,0 +1,11 @@
+.berlinPin {
+  position: relative;
+  display: inline-block;
+}
+
+.canvas {
+  pointer-events: none;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+}

@@ -1,11 +1,13 @@
 import React from "react";
 import styles from "./styles.module.css";
 
+import * as THREE from "three";
+
 import { useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Canvas } from "@react-three/fiber";
 
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, Environment, useHelper } from "@react-three/drei";
 import { Mesh } from "three/src/Three";
 
 interface Props {
@@ -26,6 +28,27 @@ interface SceneProps {
   modelId: string;
   showZeroPlane?: boolean;
 }
+
+const Lights: React.FC = () => {
+  const light = React.useRef(null) as any;
+
+  useHelper(light, THREE.SpotLightHelper, "hotpink");
+
+  return (
+    <>
+      <Environment files="hdri/industrial_room.hdr" />
+      <spotLight
+        ref={light}
+        angle={0.3}
+        position={[15, 25, 30]}
+        scale={[1, 1, 1]}
+        color="#CDD1C9"
+        intensity={1}
+        castShadow
+      />
+    </>
+  );
+};
 
 const Scene: React.FC<SceneProps> = (props) => {
   const glb = useLoader(GLTFLoader, `/gebaude/${props.modelId}.glb`);
@@ -52,9 +75,6 @@ const Scene: React.FC<SceneProps> = (props) => {
 };
 
 const GebaudeCard: React.FC<Props> = (props) => {
-  const shadow = React.useRef<Mesh>(null!);
-  const mesh = React.useRef<Mesh>(null!);
-
   return (
     <article className={styles.card}>
       <div className={styles.model}>
@@ -70,14 +90,15 @@ const GebaudeCard: React.FC<Props> = (props) => {
           }}
           shadows
         >
-          <OrbitControls makeDefault maxDistance={200} minDistance={150} />
-          <directionalLight
-            position={[5, 30, 20]}
-            color="#CDD1C9"
-            intensity={1.3}
-            castShadow
+          <OrbitControls
+            makeDefault
+            maxDistance={250}
+            minDistance={100}
+            rotateSpeed={0.5}
+            dampingFactor={0.4}
+            zoomSpeed={0.3}
           />
-          <ambientLight color="#fff" intensity={0.5} />
+          <Lights />
           <Scene modelId={props.id} showZeroPlane={props.showZeroPlane} />
         </Canvas>
       </div>

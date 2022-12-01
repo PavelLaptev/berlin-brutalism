@@ -8,10 +8,11 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Canvas } from "@react-three/fiber";
 
 import { OrbitControls, Environment, useHelper } from "@react-three/drei";
-import { Mesh } from "three/src/Three";
+
+import nameImages from "./nameImages";
 
 interface Props {
-  id: string;
+  id: gebaudeNames;
   name: string;
   architekt: {
     name: string;
@@ -102,6 +103,8 @@ const GebaudeCard: React.FC<Props> = (props) => {
           <Scene modelId={props.id} showZeroPlane={props.showZeroPlane} />
         </Canvas>
       </div>
+
+      <div>{nameImages[props.id]}</div>
     </article>
   );
 };

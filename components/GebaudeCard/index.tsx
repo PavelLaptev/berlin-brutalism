@@ -23,14 +23,32 @@ interface Props {
   wiki: string;
   modelId: string;
   showZeroPlane?: boolean;
+  camera: any;
+  light: LightProps;
+  model: {
+    scale: number;
+    position: any;
+    rotation: any;
+  };
 }
 
 interface SceneProps {
   modelId: string;
   showZeroPlane?: boolean;
+  model: {
+    scale: number;
+    position: any;
+    rotation: any;
+  };
 }
 
-const Lights: React.FC = () => {
+interface LightProps {
+  position: any;
+  angle: number;
+  intensity: number;
+}
+
+const Lights: React.FC<LightProps> = (props) => {
   const light = React.useRef(null) as any;
 
   useHelper(light, THREE.SpotLightHelper, "hotpink");
@@ -40,26 +58,44 @@ const Lights: React.FC = () => {
       <Environment files="hdri/industrial_room.hdr" />
       <spotLight
         ref={light}
-        angle={0.3}
-        position={[15, 25, 30]}
+        angle={props.angle}
+        position={props.position}
         scale={[1, 1, 1]}
         color="#CDD1C9"
-        intensity={1}
+        intensity={props.intensity}
         castShadow
       />
     </>
   );
 };
 
+const rotateHelper = Math.PI / 180;
+
 const Scene: React.FC<SceneProps> = (props) => {
   const glb = useLoader(GLTFLoader, `/gebaude/${props.modelId}.glb`);
 
-  // add shadows
-  glb.scene.traverse((o) => (o.castShadow = o.receiveShadow = true));
+  // add shadows, disable double sided faces. disable transparent faces
+  glb.scene.traverse((child) => {
+    if (child instanceof THREE.Mesh) {
+      child.castShadow = true;
+      child.receiveShadow = true;
+      child.material.side = THREE.FrontSide;
+      child.material.transparent = false;
+      child.material.depthWrite = true;
+    }
+  });
 
   return (
     <React.Suspense fallback={"loading"}>
-      <mesh position={[0, -14, 1]}>
+      <mesh
+        position={props.model.position}
+        scale={props.model.scale}
+        rotation={[
+          rotateHelper * props.model.rotation[0],
+          rotateHelper * props.model.rotation[1],
+          rotateHelper * props.model.rotation[2]
+        ]}
+      >
         <primitive object={glb.scene} />
       </mesh>
       {props.showZeroPlane && (
@@ -82,29 +118,56 @@ const GebaudeCard: React.FC<Props> = (props) => {
         <Canvas
           className={styles.canvas}
           style={{ position: "absolute", width: "100%", height: "100%" }}
-          camera={{
-            position: [130, 100, 100],
-            zoom: 0.8,
-            fov: 5,
-            near: 1,
-            far: 1000
-          }}
+          camera={props.camera}
           shadows
         >
           <OrbitControls
             makeDefault
-            maxDistance={250}
+            maxDistance={180}
             minDistance={100}
             rotateSpeed={0.5}
             dampingFactor={0.4}
             zoomSpeed={0.3}
           />
-          <Lights />
-          <Scene modelId={props.id} showZeroPlane={props.showZeroPlane} />
+          <Lights {...props.light} />
+          <Scene
+            modelId={props.id}
+            showZeroPlane={props.showZeroPlane}
+            model={props.model}
+          />
         </Canvas>
       </div>
 
-      <div>{nameImages[props.id]}</div>
+      <div className={styles.name}>{nameImages[props.id]}</div>
+
+      <div className={styles.info}>
+        <div className={styles.infoItem}>
+          <div className={styles.infoItemValueList}>
+            {props.architekt.map((architekt, index) => (
+              <a
+                key={index}
+                href={architekt.link}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {architekt.name}
+              </a>
+            ))}
+          </div>
+          <span className={styles.infoItemKey}>Architekt</span>
+        </div>
+
+        <div className={styles.infoItem}>
+          <span className={styles.infoItemValue}>{props.bauzeit}</span>
+          <span className={styles.infoItemKey}>Bauzeit</span>
+        </div>
+
+        <div className={styles.mehrLinks}>
+          <a href={props.wiki}>Mehr erfahren</a>
+          <a href={props.karte}>Auf der Karte</a>
+        </div>
+        <div />
+      </div>
     </article>
   );
 };

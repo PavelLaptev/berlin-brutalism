@@ -1,1 +1,1 @@
-type gebaudeNames = "bierpinsel" | "rosaroehre";
+type gebaudeNames = "bierpinsel" | "maeusebunker";

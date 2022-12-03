@@ -1,12 +1,17 @@
 .card {
+  position: relative;
   width: 100%;
   height: 100vh;
-  max-height: 60vh;
-  border: 1px solid black;
+  max-height: 70vh;
+  border: 2px solid var(--clr-main);
+  margin-bottom: 40px;
 }
 
 .model {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
   width: 100%;
   height: 100%;
 }
@@ -14,4 +19,72 @@
 .model iframe {
   width: 100%;
   height: 100%;
+}
+
+.name {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+}
+
+.info {
+  z-index: 3;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 0 40px 40px 0;
+  max-width: 300px;
+}
+
+.info a {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.info a,
+.info span {
+  text-align: right;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--clr-main-dark);
+}
+
+.infoItem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-bottom: 16px;
+}
+
+.infoItemValueList {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-bottom: 4px;
+}
+
+.infoItemValue {
+  margin-bottom: 4px;
+}
+
+.infoItemKey {
+  opacity: 0.5;
+}
+
+.mehrLinks {
+  display: flex;
+}
+
+.mehrLinks a {
+  margin-right: 12px;
+}
+
+.mehrLinks a:last-child {
+  margin-right: 0;
 }

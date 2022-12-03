@@ -12,18 +12,66 @@ const gebauedeData = [
     name: "Bierpinsel",
     architekt: [
       {
-        name: "Ralf Schüler",
-        link: "https://de.wikipedia.org/wiki/Ralf_Sch%C3%BCler_und_Ursulina_Sch%C3%BCler-Witte"
-      },
-      {
-        name: "Ursulina Schüler-Witte",
+        name: "Ralf Schüler & Ursulina Schüler-Witte",
         link: "https://de.wikipedia.org/wiki/Ralf_Sch%C3%BCler_und_Ursulina_Sch%C3%BCler-Witte"
       }
     ],
     bauzeit: "1972—1976",
     karte: "https://goo.gl/maps/SmF6s46hufEq6TfHA",
     wiki: "https://www.abandonedberlin.com/bierpinsel",
-    modelId: "debea999b02f4393a3b8d721a573eab7"
+    modelId: "debea999b02f4393a3b8d721a573eab7",
+    camera: {
+      position: [130, 100, 100],
+      zoom: 0.75,
+      fov: 5,
+      near: 1,
+      far: 1000
+    },
+    model: {
+      scale: 1,
+      position: [0, -9, -1],
+      rotation: [0, 0, 0]
+    },
+    light: {
+      position: [15, 25, 30],
+      angle: 0.3,
+      intensity: 1
+    }
+  },
+  {
+    id: "maeusebunker",
+    name: "Mäusebunker",
+    architekt: [
+      {
+        name: "Gerd Hänska",
+        link: "https://de.wikipedia.org/wiki/Ralf_Sch%C3%BCler_und_Ursulina_Sch%C3%BCler-Witte"
+      },
+      {
+        name: "Kurt Schmersow",
+        link: "https://de.wikipedia.org/wiki/Ralf_Sch%C3%BCler_und_Ursulina_Sch%C3%BCler-Witte"
+      }
+    ],
+    bauzeit: "1971—1981",
+    karte: "https://goo.gl/maps/SmF6s46hufEq6TfHA",
+    wiki: "https://www.abandonedberlin.com/bierpinsel",
+    modelId: "debea999b02f4393a3b8d721a573eab7",
+    camera: {
+      position: [130, 80, 100],
+      zoom: 0.8,
+      fov: 5,
+      near: 1,
+      far: 1000
+    },
+    model: {
+      scale: 0.4,
+      position: [0, -1, 1.5],
+      rotation: [0, -90, 0]
+    },
+    light: {
+      position: [13, 13, 15],
+      angle: 0.8,
+      intensity: 1.8
+    }
   }
 ];
 
@@ -43,13 +91,16 @@ export default function Home() {
           {gebauedeData.map((gebauede) => (
             <GebaudeCard
               key={gebauede.id}
-              id={gebauede.id}
+              id={gebauede.id as gebaudeNames}
               name={gebauede.name}
               architekt={gebauede.architekt}
               bauzeit={gebauede.bauzeit}
               karte={gebauede.karte}
               wiki={gebauede.wiki}
               modelId={gebauede.modelId}
+              camera={gebauede.camera}
+              model={gebauede.model as any}
+              light={gebauede.light as any}
             />
           ))}
         </section>

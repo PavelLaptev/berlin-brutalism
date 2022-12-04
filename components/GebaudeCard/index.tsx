@@ -21,7 +21,6 @@ interface Props {
   bauzeit: string;
   karte: string;
   wiki: string;
-  modelId: string;
   showZeroPlane?: boolean;
   camera: any;
   light: LightProps;
@@ -51,7 +50,7 @@ interface LightProps {
 const Lights: React.FC<LightProps> = (props) => {
   const light = React.useRef(null) as any;
 
-  useHelper(light, THREE.SpotLightHelper, "hotpink");
+  // useHelper(light, THREE.SpotLightHelper, "hotpink");
 
   return (
     <>
@@ -82,6 +81,7 @@ const Scene: React.FC<SceneProps> = (props) => {
       child.material.side = THREE.FrontSide;
       child.material.transparent = false;
       child.material.depthWrite = true;
+      child.material.opacity = 1;
     }
   });
 
@@ -112,10 +112,43 @@ const Scene: React.FC<SceneProps> = (props) => {
 };
 
 const GebaudeCard: React.FC<Props> = (props) => {
+  const [enableRotation, setEnableRotation] = React.useState(false);
+  const canvasRef = React.useRef(null) as any;
+
+  // rotate camera if a model in view
+  React.useEffect(() => {
+    // create observer
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setEnableRotation(true);
+          } else {
+            setEnableRotation(false);
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.5
+      }
+    );
+
+    // observe canvas
+    observer.observe(canvasRef.current);
+
+    // cleanup
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <article className={styles.card}>
       <div className={styles.model}>
         <Canvas
+          ref={canvasRef}
           className={styles.canvas}
           style={{ position: "absolute", width: "100%", height: "100%" }}
           camera={props.camera}
@@ -128,6 +161,9 @@ const GebaudeCard: React.FC<Props> = (props) => {
             rotateSpeed={0.5}
             dampingFactor={0.4}
             zoomSpeed={0.3}
+            autoRotate={enableRotation}
+            autoRotateSpeed={0.2}
+            enableZoom={false}
           />
           <Lights {...props.light} />
           <Scene
@@ -163,8 +199,8 @@ const GebaudeCard: React.FC<Props> = (props) => {
         </div>
 
         <div className={styles.mehrLinks}>
-          <a href={props.wiki}>Mehr erfahren</a>
-          <a href={props.karte}>Auf der Karte</a>
+          <a href={props.wiki}>Wiki</a>
+          <a href={props.karte}>Ort</a>
         </div>
         <div />
       </div>

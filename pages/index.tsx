@@ -19,7 +19,6 @@ const gebauedeData = [
     bauzeit: "1972—1976",
     karte: "https://goo.gl/maps/SmF6s46hufEq6TfHA",
     wiki: "https://www.abandonedberlin.com/bierpinsel",
-    modelId: "debea999b02f4393a3b8d721a573eab7",
     camera: {
       position: [130, 100, 100],
       zoom: 0.75,
@@ -28,8 +27,8 @@ const gebauedeData = [
       far: 1000
     },
     model: {
-      scale: 1,
-      position: [0, -9, -1],
+      scale: 1.1,
+      position: [0, -10, -1],
       rotation: [0, 0, 0]
     },
     light: {
@@ -44,7 +43,7 @@ const gebauedeData = [
     architekt: [
       {
         name: "Gerd Hänska",
-        link: "https://de.wikipedia.org/wiki/Ralf_Sch%C3%BCler_und_Ursulina_Sch%C3%BCler-Witte"
+        link: "https://de.wikipedia.org/wiki/Gerd_H%C3%A4nska"
       },
       {
         name: "Kurt Schmersow",
@@ -52,9 +51,8 @@ const gebauedeData = [
       }
     ],
     bauzeit: "1971—1981",
-    karte: "https://goo.gl/maps/SmF6s46hufEq6TfHA",
-    wiki: "https://www.abandonedberlin.com/bierpinsel",
-    modelId: "debea999b02f4393a3b8d721a573eab7",
+    karte: "https://goo.gl/maps/eAWm1rtDrBULFQe57",
+    wiki: "https://www.abandonedberlin.com/mouse-bunker/",
     camera: {
       position: [130, 80, 100],
       zoom: 0.8,
@@ -70,7 +68,101 @@ const gebauedeData = [
     light: {
       position: [13, 13, 15],
       angle: 0.8,
-      intensity: 1.8
+      intensity: 2.1
+    }
+  },
+  {
+    id: "rosaroehre",
+    name: "Rosa Röhre",
+    architekt: [
+      {
+        name: "Ludwig Leo",
+        link: "https://de.wikipedia.org/wiki/Gerd_H%C3%A4nska"
+      },
+      {
+        name: "Christian de Boes",
+        link: ""
+      }
+    ],
+    bauzeit: "1968—1974",
+    karte: "https://goo.gl/maps/zrxRS7VwsBHxxQLe7",
+    wiki: "https://de.wikipedia.org/wiki/Rosa_R%C3%B6hre",
+    camera: {
+      position: [140, 60, 100],
+      zoom: 0.78,
+      fov: 5,
+      near: 1,
+      far: 1000
+    },
+    model: {
+      scale: 0.4,
+      position: [1.8, -3.9, -3],
+      rotation: [0, 90, 0]
+    },
+    light: {
+      position: [13, 13, 15],
+      angle: 0.8,
+      intensity: 1.3
+    }
+  },
+  {
+    id: "trudelturm",
+    name: "Trudelturm",
+    architekt: [
+      {
+        name: "Hermann Brenner & Werner Deutschmann",
+        link: ""
+      }
+    ],
+    bauzeit: "1934—1936",
+    karte: "https://goo.gl/maps/pG92dCi76gmnbxZT6",
+    wiki: "https://en.wikipedia.org/wiki/Trudelturm",
+    camera: {
+      position: [100, 120, 100],
+      zoom: 0.95,
+      fov: 5,
+      near: 1,
+      far: 1000
+    },
+    model: {
+      scale: 1,
+      position: [0, -6, 0],
+      rotation: [0, -15, 0]
+    },
+    light: {
+      position: [15, 35, 15],
+      angle: 0.8,
+      intensity: 1.3
+    }
+  },
+  {
+    id: "kugellabore",
+    name: "Isothermische Kugellabore",
+    architekt: [
+      {
+        name: "Horst Welser",
+        link: "https://de.wikipedia.org/wiki/Horst_Welser"
+      }
+    ],
+    bauzeit: "1959—1961",
+    karte: "https://goo.gl/maps/pG92dCi76gmnbxZT6",
+    wiki: "https://en.wikipedia.org/wiki/Trudelturm",
+    camera: {
+      position: [100, 50, 120],
+      zoom: 1,
+      fov: 5,
+      near: 1,
+      far: 1000
+    },
+    model: {
+      scale: 0.47,
+      position: [-0, -4.0, 0],
+      rotation: [0, 100, 0]
+    },
+    light: {
+      position: [15, 25, 15],
+      angle: 0.8,
+      intensity: 0.9
     }
   }
 ];
@@ -97,7 +189,6 @@ export default function Home() {
               bauzeit={gebauede.bauzeit}
               karte={gebauede.karte}
               wiki={gebauede.wiki}
-              modelId={gebauede.modelId}
               camera={gebauede.camera}
               model={gebauede.model as any}
               light={gebauede.light as any}

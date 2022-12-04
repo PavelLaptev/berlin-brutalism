@@ -39,6 +39,7 @@
   align-items: flex-end;
   padding: 0 40px 40px 0;
   max-width: 300px;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .info a {

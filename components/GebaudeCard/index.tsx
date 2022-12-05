@@ -199,6 +199,7 @@ const GebaudeCard: React.FC<Props> = (props) => {
         </div>
 
         <div className={styles.mehrLinks}>
+          <a href={props.wiki}>Fullscreen</a>
           <a href={props.wiki}>Wiki</a>
           <a href={props.karte}>Ort</a>
         </div>

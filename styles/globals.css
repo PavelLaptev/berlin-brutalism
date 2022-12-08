@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Big+Shoulders+Text:wght@900&family=IBM+Plex+Sans:wght@400;600;700&display=swap");
 
 :root {
+  --clr-white: #fff;
   --clr-background: #cdd1c9;
   --clr-main-light: #a8aba5;
   --clr-main: #93978f;

@@ -46,10 +46,10 @@ const GebaudeCard: React.FC<CanvasProps> = (props) => {
 
             <td colSpan={2} className={styles.infoCell}>
               <a href={props.info.wiki} target="_blank" rel="noreferrer">
-                Ort
+                Wiki
               </a>
 
-              <a href={props.info.wiki} target="_blank" rel="noreferrer">
+              <a href={props.info.karte} target="_blank" rel="noreferrer">
                 Ort
               </a>
             </td>

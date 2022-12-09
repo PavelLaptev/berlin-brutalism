@@ -33,7 +33,7 @@ const Lights: React.FC<LightProps> = (props) => {
 };
 
 const Scene: React.FC<ModelProps | any> = (props) => {
-  const glb = useLoader(GLTFLoader, `/gebaude/${props.id}.glb`);
+  const glb = useLoader(GLTFLoader, `/gebaeude/${props.id}.glb`);
 
   // add shadows, disable double sided faces. disable transparent faces
   glb.scene.traverse((child) => {
@@ -74,60 +74,79 @@ const Scene: React.FC<ModelProps | any> = (props) => {
 };
 
 const GebaeudeCanvasFullscreen: React.FC<CanvasProps> = (props) => {
-  const [enableRotation, setEnableRotation] = React.useState(false);
   const canvasRef = React.useRef(null) as any;
-
-  // rotate camera if a model in view
-  React.useEffect(() => {
-    // create observer
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setEnableRotation(true);
-          } else {
-            setEnableRotation(false);
-          }
-        });
-      },
-      {
-        root: null,
-        rootMargin: "0px",
-        threshold: 0.5
-      }
-    );
-
-    // observe canvas
-    observer.observe(canvasRef.current);
-
-    // cleanup
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
+  const [showControls, setShowControls] = React.useState(true);
+  const [gebaeudePropsm, setGebaeudeProps] = React.useState({
+    ...props,
+    orbitControls: {}
+  });
 
   return (
-    <Canvas
-      ref={canvasRef}
-      className={styles.canvas}
-      style={{ position: "absolute", width: "100%", height: "100%" }}
-      camera={props.camera}
-      shadows
-    >
-      <OrbitControls
-        makeDefault
-        maxDistance={180}
-        minDistance={100}
-        rotateSpeed={0.5}
-        dampingFactor={0.4}
-        zoomSpeed={0.3}
-        autoRotate={enableRotation}
-        autoRotateSpeed={0.2}
-        enableZoom={false}
-      />
-      <Lights {...props.light} />
-      <Scene id={props.id} model={props.model} />
-    </Canvas>
+    <>
+      <div className={styles.controlsWrap}>
+        <table
+          className={styles.controlsTable}
+          style={{
+            display: showControls ? "table" : "none"
+          }}
+        >
+          <tbody>
+            <tr>
+              <th>
+                <span>Viewport</span>
+              </th>
+
+              <td>
+                <span
+                  onClick={() => {
+                    setGebaeudeProps({
+                      ...gebaeudePropsm,
+                      light: {
+                        ...gebaeudePropsm.light,
+                        position: [
+                          gebaeudePropsm.light.position[0] + 1,
+                          gebaeudePropsm.light.position[1],
+                          gebaeudePropsm.light.position[2]
+                        ]
+                      }
+                    });
+                  }}
+                >
+                  Change light position
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div
+          className={styles.showControlsBtn}
+          onClick={() => setShowControls(!showControls)}
+        >
+          <span>controls</span>
+        </div>
+      </div>
+
+      <Canvas
+        ref={canvasRef}
+        className={styles.canvas}
+        style={{ position: "absolute", width: "100%", height: "100%" }}
+        camera={gebaeudePropsm.camera}
+        shadows
+      >
+        <OrbitControls
+          makeDefault
+          maxDistance={300}
+          minDistance={100}
+          rotateSpeed={0.5}
+          dampingFactor={0.4}
+          zoomSpeed={0.3}
+          autoRotateSpeed={0.2}
+        />
+        <Lights {...gebaeudePropsm.light} />
+        <Scene id={gebaeudePropsm.id} model={gebaeudePropsm.model} />
+      </Canvas>
+    </>
   );
 };
 

@@ -76,6 +76,6 @@ const nameImages = {
       />
     </svg>
   )
-} as { [key in gebaudeNames]: any };
+} as { [key in gebaeudeNames]: any };
 
 export default nameImages;

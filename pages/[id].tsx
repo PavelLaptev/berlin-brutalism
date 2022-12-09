@@ -1,9 +1,13 @@
+import { useState } from "react";
+
 import Head from "next/head";
+import Link from "next/link";
+import Image from "next/image";
 
 import GebaeudeCanvasFullscreen from "../components/GebaeudeCanvasFullscreen";
-import styles from "../styles/gebaude.module.css";
+import styles from "../styles/gebaeude.module.css";
 
-const gebaude = [
+const gebaeude = [
   {
     id: "bierpinsel",
     info: {
@@ -37,16 +41,54 @@ const gebaude = [
       angle: 0.3,
       intensity: 1
     }
-  } as CanvasProps
+  },
+  {
+    id: "maeusebunker",
+    info: {
+      name: "Mäusebunker",
+      architekt: [
+        {
+          name: "Gerd Hänska",
+          link: "https://de.wikipedia.org/wiki/Gerd_H%C3%A4nska"
+        },
+        {
+          name: "Kurt Schmersow",
+          link: "https://de.wikipedia.org/wiki/Ralf_Sch%C3%BCler_und_Ursulina_Sch%C3%BCler-Witte"
+        }
+      ],
+      bauzeit: "1971—1981",
+      karte: "https://goo.gl/maps/eAWm1rtDrBULFQe57",
+      wiki: "https://www.abandonedberlin.com/mouse-bunker/"
+    },
+
+    camera: {
+      position: [130, 80, 100],
+      zoom: 0.8,
+      fov: 5,
+      near: 1,
+      far: 1000
+    },
+    model: {
+      showZeroPlane: false,
+      scale: 0.38,
+      position: [0, -1, 1.5],
+      rotation: [0, -90, 0]
+    },
+    light: {
+      position: [13, 13, 15],
+      angle: 0.8,
+      intensity: 2.1
+    }
+  }
 ];
 
-export default function Gebaude(props: GebaudeProps) {
-  console.log(props);
-
+export default function Gebaeude(props: GebaeudeProps) {
   return (
     <div>
       <Head>
-        <title>BERLIN BRUTALISM</title>
+        <title>
+          {props.gebaeudeData.info.name.toUpperCase()} | BERLIN BRUTALISM
+        </title>
         <meta
           name="description"
           content="The most significant brutalist buildings in Berlin"
@@ -56,14 +98,35 @@ export default function Gebaude(props: GebaudeProps) {
       </Head>
 
       <main className={styles.wrapper}>
-        <GebaeudeCanvasFullscreen {...props.gebaudeData} />
+        <Link
+          className={styles.backButton}
+          href={`./#${props.gebaeudeData.id}`}
+          title="Zurück zur Hauptseite"
+        >
+          ←
+        </Link>
+
+        <Link
+          className={styles.logo}
+          href={`./#${props.gebaeudeData.id}`}
+          title="Zurück zur Hauptseite"
+        >
+          <Image
+            src="/logo.svg"
+            alt="Brutalismus Berlin Logo"
+            width={40}
+            height={45}
+          />
+        </Link>
+
+        <GebaeudeCanvasFullscreen {...props.gebaeudeData} />
       </main>
     </div>
   );
 }
 
 export async function getStaticPaths() {
-  const ids = gebaude.map((gebaude) => gebaude.id);
+  const ids = gebaeude.map((gebaeude) => gebaeude.id);
 
   const paths = ids.map((id) => ({
     params: { id: id.toString() }
@@ -75,16 +138,16 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps = async (context: any) => {
-  const gebaudeData = gebaude.find(
-    (gebaude) => gebaude.id == context.params.id
+  const gebaeudeData = gebaeude.find(
+    (gebaeude) => gebaeude.id == context.params.id
   );
   return {
     props: {
-      gebaudeData
+      gebaeudeData
     }
   };
 };
 
-type GebaudeProps = {
-  gebaudeData: CanvasProps;
+type GebaeudeProps = {
+  gebaeudeData: CanvasProps;
 };

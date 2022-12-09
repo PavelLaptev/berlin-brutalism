@@ -33,7 +33,7 @@ const Lights: React.FC<LightProps> = (props) => {
 };
 
 const Scene: React.FC<ModelProps | any> = (props) => {
-  const glb = useLoader(GLTFLoader, `/gebaude/${props.id}.glb`);
+  const glb = useLoader(GLTFLoader, `/gebaeude/${props.id}.glb`);
 
   // add shadows, disable double sided faces. disable transparent faces
   glb.scene.traverse((child) => {
@@ -109,6 +109,7 @@ const GebaeudeCanvasPreview: React.FC<CanvasProps> = (props) => {
   return (
     <Canvas
       ref={canvasRef}
+      id={props.id}
       className={styles.canvas}
       style={{ position: "absolute", width: "100%", height: "100%" }}
       camera={props.camera}

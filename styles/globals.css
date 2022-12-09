@@ -2,11 +2,15 @@
 
 :root {
   --clr-white: #fff;
+  --clr-black: #343434;
   --clr-background: #cdd1c9;
   --clr-main-light: #a8aba5;
   --clr-main: #93978f;
   --clr-main-dark: #70746c;
   --clr-black: #000;
+
+  --table-border: 1px solid var(--clr-main);
+  --table-padding: 10px;
 }
 
 html[data-theme="dark"] {
@@ -40,4 +44,39 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+/* TABLES */
+
+table {
+  font-size: 14px;
+  text-transform: uppercase;
+  border: var(--table-border);
+  border-collapse: collapse;
+}
+
+table th,
+table td,
+table tr {
+  padding: 0;
+  font-weight: 400;
+  text-align: left;
+  vertical-align: baseline;
+  border: var(--table-border);
+}
+
+table th {
+  opacity: 0.4;
+}
+
+table span,
+table a {
+  color: var(--clr-black);
+  display: table-cell;
+  padding: var(--table-padding);
+}
+
+table a:hover {
+  background-color: var(--clr-main-light);
+  /* background-color: var(--clr-main-dark); */
 }

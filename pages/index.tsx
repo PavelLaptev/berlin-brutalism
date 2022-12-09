@@ -4,9 +4,9 @@ import styles from "../styles/app.module.css";
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import GebaudeCard from "../components/GebaudeCard";
+import GebaeudeCard from "../components/GebaeudeCard";
 
-const gebauedeIndexData = [
+const gebaeudeIndexData = [
   {
     id: "bierpinsel",
     info: {
@@ -203,14 +203,14 @@ export default function Home() {
         <Header />
 
         <section className={styles.cards}>
-          {gebauedeIndexData.map((gebauede) => (
-            <GebaudeCard
-              key={gebauede.id}
-              id={gebauede.id}
-              info={gebauede.info}
-              camera={gebauede.camera}
-              model={gebauede.model}
-              light={gebauede.light}
+          {gebaeudeIndexData.map((gebaeude) => (
+            <GebaeudeCard
+              key={gebaeude.id}
+              id={gebaeude.id}
+              info={gebaeude.info}
+              camera={gebaeude.camera}
+              model={gebaeude.model}
+              light={gebaeude.light}
             />
           ))}
         </section>

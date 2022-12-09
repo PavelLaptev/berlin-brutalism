@@ -1,0 +1,33 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+
+  --edge-padding: 20px;
+}
+
+.backButton {
+  z-index: 2;
+  position: absolute;
+  top: var(--edge-padding);
+  left: var(--edge-padding);
+
+  position: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+  padding: var(--table-padding);
+
+  color: var(--clr-black);
+  line-height: 1;
+
+  border: var(--table-border);
+}
+
+.logo {
+  z-index: 2;
+  position: absolute;
+  top: var(--edge-padding);
+  right: var(--edge-padding);
+}

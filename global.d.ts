@@ -1,4 +1,4 @@
-type gebaudeNames =
+type gebaeudeNames =
   | "bierpinsel"
   | "maeusebunker"
   | "rosaroehre"
@@ -38,7 +38,7 @@ interface InfoProps {
 }
 
 interface CanvasProps {
-  id: gebaudeNames;
+  id: gebaeudeNames;
   info: InfoProps;
   camera: CameraProps;
   light: LightProps;

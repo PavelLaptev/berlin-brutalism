@@ -1,11 +1,12 @@
 import React from "react";
 import styles from "./styles.module.css";
+import Link from "next/link";
 
 import GebaeudeCanvasPreview from "../GebaeudeCanvasPreview";
 
 import nameImages from "./nameImages";
 
-const GebaudeCard: React.FC<CanvasProps> = (props) => {
+const GebaeudeCard: React.FC<CanvasProps> = (props) => {
   return (
     <article className={styles.card}>
       <div className={styles.model}>
@@ -57,8 +58,8 @@ const GebaudeCard: React.FC<CanvasProps> = (props) => {
 
           <tr>
             <td colSpan={3}>
-              <a
-                href={props.info.wiki}
+              <Link
+                href={`/${props.id}`}
                 style={{
                   display: "block",
                   width: "100%",
@@ -66,43 +67,13 @@ const GebaudeCard: React.FC<CanvasProps> = (props) => {
                 }}
               >
                 Fullscreen öffnen
-              </a>
+              </Link>
             </td>
           </tr>
         </tbody>
       </table>
-
-      {/* <div className={styles.info}>
-        <div className={styles.infoItem}>
-          <div className={styles.infoItemValueList}>
-            {props.info.architekt.map((architekt, index) => (
-              <a
-                key={index}
-                href={architekt.link}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {architekt.name}
-              </a>
-            ))}
-          </div>
-          <span className={styles.infoItemKey}>Architekt</span>
-        </div>
-
-        <div className={styles.infoItem}>
-          <span className={styles.infoItemValue}>{props.info.bauzeit}</span>
-          <span className={styles.infoItemKey}>Bauzeit</span>
-        </div>
-
-        <div className={`${styles.mehrLinks} ${styles.infoItem}`}>
-          <a href={props.info.wiki}>Fullscreen</a>
-          <a href={props.info.wiki}>Wiki</a>
-          <a href={props.info.karte}>Ort</a>
-        </div>
-        <div />
-      </div> */}
     </article>
   );
 };
 
-export default GebaudeCard;
+export default GebaeudeCard;

@@ -1,4 +1,4 @@
-const FILLCOLOR = "var(--clr-main)";
+const FILLCOLOR = "var(--clr-main-dim)";
 
 const nameImages = {
   bierpinsel: (

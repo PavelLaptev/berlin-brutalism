@@ -7,30 +7,9 @@ import { useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Canvas } from "@react-three/fiber";
 
-import { OrbitControls, Environment, useHelper } from "@react-three/drei";
+import { OrbitControls, Environment } from "@react-three/drei";
 
 const rotateHelper = Math.PI / 180;
-
-const Lights: React.FC<LightProps> = (props) => {
-  const light = React.useRef(null) as any;
-
-  // useHelper(light, THREE.SpotLightHelper, "hotpink");
-
-  return (
-    <>
-      <Environment files="hdri/industrial_room.hdr" />
-      <spotLight
-        ref={light}
-        angle={props.angle}
-        position={props.position}
-        scale={[1, 1, 1]}
-        color="#CDD1C9"
-        intensity={props.intensity}
-        castShadow
-      />
-    </>
-  );
-};
 
 const Scene: React.FC<ModelProps | any> = (props) => {
   const glb = useLoader(GLTFLoader, `/gebaeude/${props.id}.glb`);
@@ -75,11 +54,38 @@ const Scene: React.FC<ModelProps | any> = (props) => {
 
 const GebaeudeCanvasFullscreen: React.FC<CanvasProps> = (props) => {
   const canvasRef = React.useRef(null) as any;
+  const light = React.useRef(null) as any;
   const [showControls, setShowControls] = React.useState(true);
-  const [gebaeudePropsm, setGebaeudeProps] = React.useState({
+  const [isDarkTheme, setIsDarkTheme] = React.useState(false);
+  const [gebaeudeStates, setGebaeudeStates] = React.useState({
     ...props,
-    orbitControls: {}
+    camera: {
+      ...props.camera,
+      fov: 5
+    },
+    autorotate: true
   });
+
+  React.useEffect(() => {
+    const theme = localStorage.getItem("theme");
+
+    if (theme === "dark") {
+      setIsDarkTheme(true);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    localStorage.setItem("theme", isDarkTheme ? "dark" : "light");
+
+    document.documentElement.setAttribute(
+      "data-theme",
+      isDarkTheme ? "dark" : "light"
+    );
+  }, [isDarkTheme]);
+
+  const handleTheme = () => {
+    setIsDarkTheme(!isDarkTheme);
+  };
 
   return (
     <>
@@ -93,26 +99,105 @@ const GebaeudeCanvasFullscreen: React.FC<CanvasProps> = (props) => {
           <tbody>
             <tr>
               <th>
-                <span>Viewport</span>
+                <span>Autorotate</span>
               </th>
 
               <td>
                 <span
+                  className={styles.tableButton}
                   onClick={() => {
-                    setGebaeudeProps({
-                      ...gebaeudePropsm,
-                      light: {
-                        ...gebaeudePropsm.light,
-                        position: [
-                          gebaeudePropsm.light.position[0] + 1,
-                          gebaeudePropsm.light.position[1],
-                          gebaeudePropsm.light.position[2]
-                        ]
-                      }
+                    setGebaeudeStates({
+                      ...gebaeudeStates,
+                      autorotate: !gebaeudeStates.autorotate
                     });
                   }}
                 >
-                  Change light position
+                  {gebaeudeStates.autorotate ? "true" : "false"}
+                </span>
+              </td>
+            </tr>
+
+            <tr>
+              <th>
+                <span>Light rotation</span>
+              </th>
+              <td>
+                <div className="rangeInput">
+                  <input
+                    type="range"
+                    min="0"
+                    max="360"
+                    step="1"
+                    onChange={(e) => {
+                      setGebaeudeStates({
+                        ...gebaeudeStates,
+                        light: {
+                          ...gebaeudeStates.light,
+                          position: [
+                            Math.sin(Number(e.target.value) * (Math.PI / 180)) *
+                              props.light.position[0],
+                            props.light.position[1],
+                            Math.cos(Number(e.target.value) * (Math.PI / 180)) *
+                              props.light.position[2]
+                          ]
+                        }
+                      });
+                    }}
+                  />
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <th>
+                <span>Light angle</span>
+              </th>
+              <td>
+                <div className="rangeInput">
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    step="1"
+                    onChange={(e) => {
+                      setGebaeudeStates({
+                        ...gebaeudeStates,
+                        light: {
+                          ...gebaeudeStates.light,
+                          angle: Number(e.target.value) / 100
+                        }
+                      });
+                    }}
+                  />
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <th>
+                <span>Dark theme</span>
+              </th>
+
+              <td>
+                <span
+                  className={styles.tableButton}
+                  onClick={() => setIsDarkTheme(!isDarkTheme)}
+                >
+                  {isDarkTheme ? "true" : "false"}
+                </span>
+              </td>
+            </tr>
+
+            <tr>
+              <td colSpan={2}>
+                <span
+                  style={{
+                    fontSize: "12px",
+                    maxWidth: "200px"
+                  }}
+                >
+                  Holf left mouse button to rotate and right button to move.
+                  Scroll to zoom.
                 </span>
               </td>
             </tr>
@@ -120,7 +205,7 @@ const GebaeudeCanvasFullscreen: React.FC<CanvasProps> = (props) => {
         </table>
 
         <div
-          className={styles.showControlsBtn}
+          className={`${styles.tableButton} ${styles.controlButton}`}
           onClick={() => setShowControls(!showControls)}
         >
           <span>controls</span>
@@ -131,7 +216,7 @@ const GebaeudeCanvasFullscreen: React.FC<CanvasProps> = (props) => {
         ref={canvasRef}
         className={styles.canvas}
         style={{ position: "absolute", width: "100%", height: "100%" }}
-        camera={gebaeudePropsm.camera}
+        camera={{ ...props.camera, fov: 5, near: 1, far: 1000 }}
         shadows
       >
         <OrbitControls
@@ -141,10 +226,19 @@ const GebaeudeCanvasFullscreen: React.FC<CanvasProps> = (props) => {
           rotateSpeed={0.5}
           dampingFactor={0.4}
           zoomSpeed={0.3}
+          autoRotate={gebaeudeStates.autorotate}
           autoRotateSpeed={0.2}
         />
-        <Lights {...gebaeudePropsm.light} />
-        <Scene id={gebaeudePropsm.id} model={gebaeudePropsm.model} />
+        <Environment files="hdri/industrial_room.hdr" />
+        <spotLight
+          ref={light}
+          angle={gebaeudeStates.light.angle}
+          position={gebaeudeStates.light.position}
+          color="#CDD1C9"
+          intensity={gebaeudeStates.light.intensity}
+          castShadow
+        />
+        <Scene id={gebaeudeStates.id} model={gebaeudeStates.model} />
       </Canvas>
     </>
   );

@@ -24,18 +24,27 @@
   flex-direction: column;
 }
 
-.showControlsBtn {
+.tableButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
   cursor: pointer;
   user-select: none;
 
   padding: var(--table-padding);
-  border: var(--table-border);
 
   font-size: 14px;
   color: var(--clr-black);
   text-transform: uppercase;
 }
 
-.showControlsBtn:hover {
+.tableButton:hover {
   background-color: var(--clr-main-light);
+}
+
+.controlButton {
+  border: var(--table-border);
+  margin-top: 10px;
 }

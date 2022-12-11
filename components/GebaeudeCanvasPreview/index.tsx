@@ -23,7 +23,6 @@ const Lights: React.FC<LightProps> = (props) => {
         ref={light}
         angle={props.angle}
         position={props.position}
-        scale={[1, 1, 1]}
         color="#CDD1C9"
         intensity={props.intensity}
         castShadow
@@ -112,7 +111,7 @@ const GebaeudeCanvasPreview: React.FC<CanvasProps> = (props) => {
       id={props.id}
       className={styles.canvas}
       style={{ position: "absolute", width: "100%", height: "100%" }}
-      camera={props.camera}
+      camera={{ ...props.camera, fov: 5, near: 1, far: 1000 }}
       shadows
     >
       <OrbitControls

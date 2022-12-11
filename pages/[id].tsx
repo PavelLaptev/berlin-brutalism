@@ -7,88 +7,13 @@ import Image from "next/image";
 import GebaeudeCanvasFullscreen from "../components/GebaeudeCanvasFullscreen";
 import styles from "../styles/gebaeude.module.css";
 
-const gebaeude = [
-  {
-    id: "bierpinsel",
-    info: {
-      name: "Bierpinsel",
-      architekt: [
-        {
-          name: "Ralf Schüler & Ursulina Schüler-Witte",
-          link: "https://de.wikipedia.org/wiki/Ralf_Sch%C3%BCler_und_Ursulina_Sch%C3%BCler-Witte"
-        }
-      ],
-      bauzeit: "1972—1976",
-      karte: "https://goo.gl/maps/SmF6s46hufEq6TfHA",
-      wiki: "https://www.abandonedberlin.com/bierpinsel"
-    },
-
-    camera: {
-      position: [130, 100, 100],
-      zoom: 0.75,
-      fov: 5,
-      near: 1,
-      far: 1000
-    },
-    model: {
-      showZeroPlane: false,
-      scale: 1,
-      position: [0, -9.2, -1],
-      rotation: [0, 0, 0]
-    },
-    light: {
-      position: [15, 25, 30],
-      angle: 0.3,
-      intensity: 1
-    }
-  },
-  {
-    id: "maeusebunker",
-    info: {
-      name: "Mäusebunker",
-      architekt: [
-        {
-          name: "Gerd Hänska",
-          link: "https://de.wikipedia.org/wiki/Gerd_H%C3%A4nska"
-        },
-        {
-          name: "Kurt Schmersow",
-          link: "https://de.wikipedia.org/wiki/Ralf_Sch%C3%BCler_und_Ursulina_Sch%C3%BCler-Witte"
-        }
-      ],
-      bauzeit: "1971—1981",
-      karte: "https://goo.gl/maps/eAWm1rtDrBULFQe57",
-      wiki: "https://www.abandonedberlin.com/mouse-bunker/"
-    },
-
-    camera: {
-      position: [130, 80, 100],
-      zoom: 0.8,
-      fov: 5,
-      near: 1,
-      far: 1000
-    },
-    model: {
-      showZeroPlane: false,
-      scale: 0.38,
-      position: [0, -1, 1.5],
-      rotation: [0, -90, 0]
-    },
-    light: {
-      position: [13, 13, 15],
-      angle: 0.8,
-      intensity: 2.1
-    }
-  }
-];
+import gebaeudeData from "../data/gebaeudeData";
 
 export default function Gebaeude(props: GebaeudeProps) {
   return (
     <div>
       <Head>
-        <title>
-          {props.gebaeudeData.info.name.toUpperCase()} | BERLIN BRUTALISM
-        </title>
+        <title>{props.info.name.toUpperCase()} | BERLIN BRUTALISM</title>
         <meta
           name="description"
           content="The most significant brutalist buildings in Berlin"
@@ -100,15 +25,26 @@ export default function Gebaeude(props: GebaeudeProps) {
       <main className={styles.wrapper}>
         <Link
           className={styles.backButton}
-          href={`./#${props.gebaeudeData.id}`}
+          href={`./#${props.id}`}
           title="Zurück zur Hauptseite"
         >
-          ←
+          <svg
+            width="23"
+            height="22"
+            viewBox="0 0 23 22"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M11.5 1L1.5 11M1.5 11L11.5 21M1.5 11H22.5"
+              stroke="var(--clr-main-dark)"
+            />
+          </svg>
         </Link>
 
         <Link
           className={styles.logo}
-          href={`./#${props.gebaeudeData.id}`}
+          href={`./#${props.id}`}
           title="Zurück zur Hauptseite"
         >
           <Image
@@ -119,14 +55,14 @@ export default function Gebaeude(props: GebaeudeProps) {
           />
         </Link>
 
-        <GebaeudeCanvasFullscreen {...props.gebaeudeData} />
+        <GebaeudeCanvasFullscreen {...props} />
       </main>
     </div>
   );
 }
 
 export async function getStaticPaths() {
-  const ids = gebaeude.map((gebaeude) => gebaeude.id);
+  const ids = gebaeudeData.map((gebaeude) => gebaeude.id);
 
   const paths = ids.map((id) => ({
     params: { id: id.toString() }
@@ -138,16 +74,12 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps = async (context: any) => {
-  const gebaeudeData = gebaeude.find(
+  const data = gebaeudeData.find(
     (gebaeude) => gebaeude.id == context.params.id
   );
   return {
-    props: {
-      gebaeudeData
-    }
+    props: data
   };
 };
 
-type GebaeudeProps = {
-  gebaeudeData: CanvasProps;
-};
+type GebaeudeProps = CanvasProps;

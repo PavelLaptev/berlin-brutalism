@@ -1,22 +1,30 @@
 @import url("https://fonts.googleapis.com/css2?family=Big+Shoulders+Text:wght@900&family=IBM+Plex+Sans:wght@400;600;700&display=swap");
 
+::selection {
+  background-color: var(--clr-main-dim);
+  color: var(--clr-white);
+}
+
 :root {
   --clr-white: #fff;
   --clr-black: #343434;
-  --clr-background: #cdd1c9;
+
+  --clr-main: #cdd1c9;
   --clr-main-light: #a8aba5;
-  --clr-main: #93978f;
+  --clr-main-dim: #93978f;
   --clr-main-dark: #70746c;
   --clr-black: #000;
 
-  --table-border: 1px solid var(--clr-main);
+  --clr-background: var(--clr-main);
+
+  --table-border: 1px solid var(--clr-main-dim);
   --table-padding: 10px;
 }
 
 html[data-theme="dark"] {
-  --clr-background: #343631;
+  --clr-main: #343631;
   --clr-main-light: #a8aba5;
-  --clr-main: #93978f;
+  --clr-main-dim: #93978f;
   --clr-main-dark: #7b8175;
   --clr-black: #000;
 }
@@ -34,6 +42,7 @@ body {
     "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   background-color: var(--clr-background);
 }
 
@@ -79,4 +88,40 @@ table a {
 table a:hover {
   background-color: var(--clr-main-light);
   /* background-color: var(--clr-main-dark); */
+}
+
+/* RANGE */
+
+.rangeInput {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: var(--table-padding);
+  margin-bottom: 5px;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 0;
+  background: var(--clr-main-light);
+  outline: none;
+  margin: 0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  background: var(--clr-main-dim);
+  border: var(--table-border);
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  background: var(--clr-main-dark);
+  border: 1px solid var(--clr-main-dark);
 }

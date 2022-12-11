@@ -1,24 +1,121 @@
-.header {
+.footer {
   display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100vh;
-  max-height: 550px;
+  border: 2px solid var(--clr-main-dim);
+  margin-top: 40px;
 }
 
-.name {
-  display: flex;
-  flex-direction: column;
-  width: fit-content;
-}
-
-.berlinPin {
-  width: 140px;
-  height: 150px;
-}
-
-.title {
-  font-family: "Big Shoulders Text", sans-serif;
-  text-transform: uppercase;
+.footer span,
+.footer p,
+.footer a {
   text-align: center;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--clr-main-dim);
+}
+
+.footer p {
+  margin: 0;
+}
+
+.link {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.link:hover {
+  color: var(--clr-main-dark);
+}
+
+.gumroad {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 80px;
+
+  border-right: 2px solid var(--clr-main-dim);
+}
+
+.gumroadButton {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  margin: 20px 0;
+  background-color: var(--clr-main-dim);
+}
+
+.gumroadButton:hover {
+  background-color: var(--clr-main-dark);
+}
+
+.gumroadText {
+  font-size: 14px;
+  max-width: 240px;
+}
+
+.credits {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 80px;
+}
+
+.about {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.heartIcon {
+  margin-left: 8px;
+}
+
+/* TOGGLE */
+
+.toggle {
+  position: relative;
+  width: 34px;
+  height: 28px;
+  background-color: var(--clr-main-dim);
+
+  margin-left: 28px;
+}
+
+.toggle::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -14px;
+  width: 28px;
+  height: 28px;
+  background-color: #ffd600;
+  border-radius: 50%;
+}
+
+.toggle:hover {
+  background-color: var(--clr-main-dark);
+}
+
+.toggleActive::before {
+  left: 20px;
+}
+
+/* ----- */
+
+.copyright {
+  font-size: 14px;
+  max-width: 320px;
 }

@@ -11,18 +11,25 @@
   top: var(--edge-padding);
   left: var(--edge-padding);
 
-  position: flex;
+  display: flex;
   align-items: center;
   justify-content: center;
 
   width: 40px;
   height: 40px;
-  padding: var(--table-padding);
 
   color: var(--clr-black);
   line-height: 1;
 
   border: var(--table-border);
+}
+
+.backButton:hover {
+  background-color: var(--clr-main-light);
+}
+
+.backButton:hover path {
+  stroke: var(--clr-black);
 }
 
 .logo {

@@ -29,6 +29,7 @@ const Head: React.FC<Props> = (props) => {
           href="./fav/fav-16.png"
         />
         <link rel="icon" href="./fav/favicon.ico" />
+        <script async src="https://cdn.splitbee.io/sb.js"></script>
       </HeadComponent>
     </>
   );

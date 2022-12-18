@@ -12,7 +12,7 @@ import { OrbitControls, Environment } from "@react-three/drei";
 const rotateHelper = Math.PI / 180;
 
 const Scene: React.FC<ModelProps | any> = (props) => {
-  const glb = useLoader(GLTFLoader, `/gebaeude/${props.id}.glb`);
+  const glb = useLoader(GLTFLoader, `./gebaeude/${props.id}.glb`);
 
   // add shadows, disable double sided faces. disable transparent faces
   glb.scene.traverse((child) => {

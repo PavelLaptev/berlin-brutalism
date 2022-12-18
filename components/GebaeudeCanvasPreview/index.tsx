@@ -34,7 +34,7 @@ const Lights: React.FC<LightProps> = (props) => {
 };
 
 const Scene: React.FC<ModelProps | any> = (props) => {
-  const glb = useLoader(GLTFLoader, `/gebaeude/${props.id}.glb`);
+  const glb = useLoader(GLTFLoader, `./gebaeude/${props.id}.glb`);
 
   // add shadows, disable double sided faces. disable transparent faces
   glb.scene.traverse((child) => {

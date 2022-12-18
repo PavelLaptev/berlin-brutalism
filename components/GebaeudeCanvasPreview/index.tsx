@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import styles from "./styles.module.css";
 
 import * as THREE from "three";
@@ -9,7 +9,7 @@ import { useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Canvas } from "@react-three/fiber";
 
-import { OrbitControls, Environment, useHelper } from "@react-three/drei";
+import { OrbitControls, Environment } from "@react-three/drei";
 
 const rotateHelper = Math.PI / 180;
 
@@ -80,7 +80,7 @@ const GebaeudeCanvasPreview: React.FC<CanvasProps> = (props) => {
   });
 
   return (
-    <React.Suspense fallback={<Loader />}>
+    <Suspense fallback={<Loader />}>
       <Canvas
         ref={ref}
         id={props.id}
@@ -103,7 +103,7 @@ const GebaeudeCanvasPreview: React.FC<CanvasProps> = (props) => {
         <Lights {...props.light} />
         <Scene id={props.id} model={props.model} />
       </Canvas>
-    </React.Suspense>
+    </Suspense>
   );
 };
 

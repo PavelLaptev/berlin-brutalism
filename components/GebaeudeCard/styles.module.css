@@ -61,5 +61,6 @@
   .canvas {
     position: relative;
     height: 50vh;
+    min-height: 320px;
   }
 }

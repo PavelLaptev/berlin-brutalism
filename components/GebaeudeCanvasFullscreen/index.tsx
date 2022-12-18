@@ -3,6 +3,7 @@ import styles from "./styles.module.css";
 
 import * as THREE from "three";
 
+import Loader from "../Loader";
 import { useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Canvas } from "@react-three/fiber";
@@ -27,7 +28,7 @@ const Scene: React.FC<ModelProps | any> = (props) => {
   });
 
   return (
-    <React.Suspense fallback={"loading"}>
+    <React.Suspense fallback={<Loader position="center" />}>
       <mesh
         position={props.model.position}
         scale={props.model.scale}
@@ -208,7 +209,7 @@ const GebaeudeCanvasFullscreen: React.FC<CanvasProps> = (props) => {
           className={`tableButton ${styles.controlButton}`}
           onClick={() => setShowControls(!showControls)}
         >
-          <span>controls</span>
+          <span>{showControls ? "Hide controls" : "Show controls"}</span>
         </div>
       </div>
 

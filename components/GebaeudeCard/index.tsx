@@ -5,7 +5,6 @@ import Link from "next/link";
 import GebaeudeCanvasPreview from "../GebaeudeCanvasPreview";
 
 import nameImages from "./nameImages";
-
 const GebaeudeCard: React.FC<CanvasProps> = (props) => {
   return (
     <article className={styles.card}>

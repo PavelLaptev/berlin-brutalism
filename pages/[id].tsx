@@ -39,7 +39,7 @@ export default function Gebaeude(props: GebaeudeProps) {
           title="Zurück zur Hauptseite"
         >
           <Image
-            src="/logo.svg"
+            src="./logo.svg"
             alt="Brutalismus Berlin Logo"
             width={40}
             height={45}

@@ -15,20 +15,20 @@ const Head: React.FC<Props> = (props) => {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <link rel="apple-touch-icon" sizes="180x180" href="/fav/fav-180.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="./fav/fav-180.png" />
         <link
           rel="icon"
           type="image/png"
           sizes="32x32"
-          href="/fav/fav-32.png"
+          href="./fav/fav-32.png"
         />
         <link
           rel="icon"
           type="image/png"
           sizes="16x16"
-          href="/fav/fav-16.png"
+          href="./fav/fav-16.png"
         />
-        <link rel="icon" href="/fav/favicon.ico" />
+        <link rel="icon" href="./fav/favicon.ico" />
       </HeadComponent>
     </>
   );

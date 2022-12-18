@@ -11,7 +11,7 @@ interface Props {
 
 const Scene: React.FC = () => {
   const [mousePosition, setMousePosition] = React.useState({ x: 0, y: 0 });
-  const gltf = useLoader(GLTFLoader, "/berlin-wappen.gltf");
+  const gltf = useLoader(GLTFLoader, "./berlin-wappen.gltf");
 
   const handleMouseMove = (e: MouseEvent) => {
     let mousePosition = {

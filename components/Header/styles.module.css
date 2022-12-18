@@ -25,4 +25,5 @@
   text-transform: uppercase;
   text-align: center;
   margin: 0;
+  color: var(--clr-black);
 }

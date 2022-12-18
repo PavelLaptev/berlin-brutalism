@@ -46,3 +46,5 @@ interface CanvasProps {
 }
 
 type CanvasArray = CanvasProps[];
+
+declare module "react-use-observer";

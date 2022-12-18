@@ -2,7 +2,9 @@ import React from "react";
 import styles from "./styles.module.css";
 
 import * as THREE from "three";
+import { useInView } from "react-intersection-observer";
 
+import Loader from "../Loader";
 import { useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Canvas } from "@react-three/fiber";
@@ -47,7 +49,7 @@ const Scene: React.FC<ModelProps | any> = (props) => {
   });
 
   return (
-    <React.Suspense fallback={"loading"}>
+    <>
       <mesh
         position={props.model.position}
         scale={props.model.scale}
@@ -68,66 +70,40 @@ const Scene: React.FC<ModelProps | any> = (props) => {
           />
         </mesh>
       )}
-    </React.Suspense>
+    </>
   );
 };
 
 const GebaeudeCanvasPreview: React.FC<CanvasProps> = (props) => {
-  const [enableRotation, setEnableRotation] = React.useState(false);
-  const canvasRef = React.useRef(null) as any;
-
-  // rotate camera if a model in view
-  React.useEffect(() => {
-    // create observer
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setEnableRotation(true);
-          } else {
-            setEnableRotation(false);
-          }
-        });
-      },
-      {
-        root: null,
-        rootMargin: "0px",
-        threshold: 0.5
-      }
-    );
-
-    // observe canvas
-    observer.observe(canvasRef.current);
-
-    // cleanup
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
+  const { ref, inView } = useInView({
+    threshold: 0.5
+  });
 
   return (
-    <Canvas
-      ref={canvasRef}
-      id={props.id}
-      className={styles.canvas}
-      style={{ position: "absolute", width: "100%", height: "100%" }}
-      camera={{ ...props.camera, fov: 5, near: 1, far: 1000 }}
-      shadows
-    >
-      <OrbitControls
-        makeDefault
-        maxDistance={180}
-        minDistance={100}
-        rotateSpeed={0.5}
-        dampingFactor={0.4}
-        zoomSpeed={0.3}
-        autoRotate={enableRotation}
-        autoRotateSpeed={0.2}
-        enableZoom={false}
-      />
-      <Lights {...props.light} />
-      <Scene id={props.id} model={props.model} />
-    </Canvas>
+    <React.Suspense fallback={<Loader />}>
+      <Canvas
+        ref={ref}
+        id={props.id}
+        className={`${styles.canvas}`}
+        style={{ width: "100%", height: "100%" }}
+        camera={{ ...props.camera, fov: 5, near: 1, far: 1000 }}
+        shadows
+      >
+        <OrbitControls
+          makeDefault
+          maxDistance={180}
+          minDistance={100}
+          rotateSpeed={0.5}
+          dampingFactor={0.4}
+          zoomSpeed={0.3}
+          autoRotate={inView}
+          autoRotateSpeed={0.2}
+          enableZoom={false}
+        />
+        <Lights {...props.light} />
+        <Scene id={props.id} model={props.model} />
+      </Canvas>
+    </React.Suspense>
   );
 };
 

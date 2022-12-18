@@ -1,4 +1,4 @@
-import Head from "next/head";
+import Head from "../components/Head";
 
 import styles from "../styles/app.module.css";
 
@@ -11,15 +11,7 @@ import gebaeudeData from "../data/gebaeudeData";
 export default function Home() {
   return (
     <div>
-      <Head>
-        <title>BERLIN BRUTALISM</title>
-        <meta
-          name="description"
-          content="The most significant brutalist buildings in Berlin"
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <Head />
 
       <main className={styles.wrapper}>
         <Header />

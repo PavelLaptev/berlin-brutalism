@@ -29,7 +29,7 @@
 }
 
 .backButton:hover path {
-  stroke: var(--clr-black);
+  stroke: var(--text-link-hover);
 }
 
 .logo {

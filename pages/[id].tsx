@@ -1,6 +1,5 @@
-import { useState } from "react";
+import Head from "../components/Head";
 
-import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -12,15 +11,7 @@ import gebaeudeData from "../data/gebaeudeData";
 export default function Gebaeude(props: GebaeudeProps) {
   return (
     <div>
-      <Head>
-        <title>{props.info.name.toUpperCase()} | BERLIN BRUTALISM</title>
-        <meta
-          name="description"
-          content="The most significant brutalist buildings in Berlin"
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <Head title={`${props.info.name.toUpperCase()} | BERLIN BRUTALISM`} />
 
       <main className={styles.wrapper}>
         <Link

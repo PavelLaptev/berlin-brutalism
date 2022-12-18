@@ -9,7 +9,7 @@ import nameImages from "./nameImages";
 const GebaeudeCard: React.FC<CanvasProps> = (props) => {
   return (
     <article className={styles.card}>
-      <div className={styles.model}>
+      <div className={styles.canvas}>
         <GebaeudeCanvasPreview {...props} />
       </div>
 

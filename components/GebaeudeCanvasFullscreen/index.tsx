@@ -104,7 +104,7 @@ const GebaeudeCanvasFullscreen: React.FC<CanvasProps> = (props) => {
 
               <td>
                 <span
-                  className={styles.tableButton}
+                  className={`tableButton`}
                   onClick={() => {
                     setGebaeudeStates({
                       ...gebaeudeStates,
@@ -180,7 +180,7 @@ const GebaeudeCanvasFullscreen: React.FC<CanvasProps> = (props) => {
 
               <td>
                 <span
-                  className={styles.tableButton}
+                  className={`tableButton`}
                   onClick={() => setIsDarkTheme(!isDarkTheme)}
                 >
                   {isDarkTheme ? "true" : "false"}
@@ -196,8 +196,8 @@ const GebaeudeCanvasFullscreen: React.FC<CanvasProps> = (props) => {
                     maxWidth: "200px"
                   }}
                 >
-                  Holf left mouse button to rotate and right button to move.
-                  Scroll to zoom.
+                  Hold the left mouse button to rotate and the right mouse
+                  button to move. Scroll to zoom in.
                 </span>
               </td>
             </tr>
@@ -205,7 +205,7 @@ const GebaeudeCanvasFullscreen: React.FC<CanvasProps> = (props) => {
         </table>
 
         <div
-          className={`${styles.tableButton} ${styles.controlButton}`}
+          className={`tableButton ${styles.controlButton}`}
           onClick={() => setShowControls(!showControls)}
         >
           <span>controls</span>

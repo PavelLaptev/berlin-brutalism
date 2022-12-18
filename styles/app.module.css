@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   max-width: 1440px;
-  padding: clamp(0.625rem, -2.6562500000000004rem + 8.75vw, 5rem);
+  padding: clamp(0.025rem, -0.6562500000000004rem + 10.75vw, 5rem)
+    clamp(0.625rem, -2.6562500000000004rem + 8.75vw, 5rem)
+    clamp(0.625rem, -2.6562500000000004rem + 8.75vw, 5rem);
   margin: 0 auto;
 }

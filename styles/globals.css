@@ -6,27 +6,36 @@
 }
 
 :root {
-  --clr-white: #fff;
-  --clr-black: #343434;
-
-  --clr-main: #cdd1c9;
-  --clr-main-light: #a8aba5;
-  --clr-main-dim: #93978f;
-  --clr-main-dark: #70746c;
-  --clr-black: #000;
-
-  --clr-background: var(--clr-main);
-
   --table-border: 1px solid var(--clr-main-dim);
   --table-padding: 10px;
 }
 
-html[data-theme="dark"] {
-  --clr-main: #343631;
-  --clr-main-light: #a8aba5;
+html[data-theme="light"] {
+  --clr-white: #fff;
+  --clr-black: #0f0f0f;
+
+  --clr-main: #cdd1c9;
+  --clr-main-light: #bcbeba;
   --clr-main-dim: #93978f;
-  --clr-main-dark: #7b8175;
-  --clr-black: #000;
+  --clr-main-dark: #70746c;
+
+  --clr-background: var(--clr-main);
+
+  --text-link-hover: var(--clr-black);
+}
+
+html[data-theme="dark"] {
+  --clr-white: #343434;
+  --clr-black: #a8aba5;
+
+  --clr-main: #3e3e3c;
+  --clr-main-light: #4c4c49;
+  --clr-main-dim: #5f615c;
+  --clr-main-dark: #5a5d57;
+
+  --clr-background: var(--clr-white);
+
+  --text-link-hover: var(--clr-black);
 }
 
 html {
@@ -45,6 +54,22 @@ body {
   text-rendering: optimizeLegibility;
   background-color: var(--clr-background);
 }
+
+/* CUSTOMIZE SCROLLBAR */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--clr-main-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--clr-main-dim);
+}
+
+/* OTHER */
 
 a {
   color: inherit;
@@ -87,7 +112,7 @@ table a {
 
 table a:hover {
   background-color: var(--clr-main-light);
-  /* background-color: var(--clr-main-dark); */
+  color: var(--text-link-hover);
 }
 
 /* RANGE */
@@ -124,4 +149,32 @@ input[type="range"]::-webkit-slider-thumb {
 input[type="range"]::-webkit-slider-thumb:hover {
   background: var(--clr-main-dark);
   border: 1px solid var(--clr-main-dark);
+}
+
+/* BUTTONS */
+
+.tableButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  cursor: pointer;
+  user-select: none;
+
+  padding: var(--table-padding);
+
+  font-size: 14px;
+  color: var(--clr-black);
+  text-transform: uppercase;
+}
+
+.tableButton:hover {
+  background-color: var(--clr-main-light);
+  color: var(--text-link-hover);
+}
+
+.controlButton {
+  border: var(--table-border);
+  margin-top: 10px;
 }

@@ -119,3 +119,17 @@
   font-size: 14px;
   max-width: 320px;
 }
+
+/* MEDIA */
+
+@media (max-width: 800px) {
+  .footer {
+    flex-direction: column;
+    margin-top: 0;
+  }
+
+  .gumroad {
+    border-right: none;
+    border-bottom: 2px solid var(--clr-main-dim);
+  }
+}

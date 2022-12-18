@@ -42,7 +42,11 @@ const Footer = () => {
     <footer className={styles.footer}>
       <div className={styles.gumroad}>
         <span className={styles.gumroadText}>Buy* / download models</span>
-        <Link className={styles.gumroadButton} href="#">
+        <Link
+          className={styles.gumroadButton}
+          href="https://pawellaptew.gumroad.com/l/berlin-brutalism"
+          target={"_blank"}
+        >
           <svg
             width="190"
             height="27"

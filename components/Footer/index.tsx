@@ -64,7 +64,7 @@ const Footer = () => {
           </svg>
         </Link>
         <span className={styles.gumroadText}>
-          *All money will be donated to 
+          *All proceeds will be donated to 
           <Link
             href="https://www.ukraine-hilfe-berlin.de/"
             target="_blank"
@@ -117,7 +117,7 @@ const Footer = () => {
             className={isEmailCopied ? "" : styles.link}
             title="copy email to clipboard"
           >
-            {isEmailCopied ? "Email copied" : "Email me"}
+            {isEmailCopied ? "Email copied" : "Email me"}
           </span>
         </p>
       </div>

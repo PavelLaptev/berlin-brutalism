@@ -32,7 +32,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 80px;
+  padding: 80px 40px;
 
   border-right: 2px solid var(--clr-main-dim);
 }
@@ -43,7 +43,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 20px;
+  padding: 20px 30px;
   margin: 20px 0;
   background-color: var(--clr-main-dim);
 }
@@ -63,7 +63,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 80px;
+  padding: 80px 40px;
 }
 
 .about {
@@ -131,5 +131,10 @@
   .gumroad {
     border-right: none;
     border-bottom: 2px solid var(--clr-main-dim);
+  }
+
+  .gumroad,
+  .credits {
+    padding: 80px 40px;
   }
 }

@@ -10,8 +10,8 @@ const Head: React.FC<Props> = (props) => {
       <HeadComponent>
         <title>{props.title}</title>
         <meta
-          name="description"
-          content="The most significant brutalist buildings in Berlin"
+          name="BERLIN BRUTALISM"
+          content="3D models of the most significant brutalist buildings in Berlin"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -28,6 +28,7 @@ const Head: React.FC<Props> = (props) => {
           sizes="16x16"
           href="/fav/fav-16.png"
         />
+        <link rel="icon" href="/fav/favicon.ico" />
       </HeadComponent>
     </>
   );

@@ -9,9 +9,11 @@ import styles from "../styles/gebaeude.module.css";
 import gebaeudeData from "../data/gebaeudeData";
 
 export default function Gebaeude(props: GebaeudeProps) {
+  const pageTitle = `${props.info.name.toUpperCase()} | BERLIN BRUTALISM`;
+
   return (
     <div>
-      <Head title={`${props.info.name.toUpperCase()} | BERLIN BRUTALISM`} />
+      <Head title={pageTitle} ogTitle={pageTitle} ogImageName={props.id} />
 
       <main className={styles.wrapper}>
         <Link

@@ -2,6 +2,12 @@
   display: flex;
   border: 2px solid var(--clr-main-dim);
   margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 80px 40px;
+  gap: 50px;
 }
 
 .footer span,
@@ -26,51 +32,10 @@
   color: var(--clr-main-dark);
 }
 
-.gumroad {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 80px 40px;
-
-  border-right: 2px solid var(--clr-main-dim);
-}
-
-.gumroadButton {
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 20px 30px;
-  margin: 20px 0;
-  background-color: var(--clr-main-dim);
-}
-
-.gumroadButton:hover {
-  background-color: var(--clr-main-dark);
-}
-
-.gumroadText {
-  font-size: 14px;
-  max-width: 240px;
-}
-
-.credits {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 80px 40px;
-}
-
 .about {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 28px;
 }
 
 .author {
@@ -120,21 +85,19 @@
   max-width: 320px;
 }
 
+/* ----- */
+
+.links {
+  display: flex;
+  gap: 20px;
+}
+
 /* MEDIA */
 
 @media (max-width: 800px) {
   .footer {
     flex-direction: column;
     margin-top: 0;
-  }
-
-  .gumroad {
-    border-right: none;
-    border-bottom: 2px solid var(--clr-main-dim);
-  }
-
-  .gumroad,
-  .credits {
     padding: 80px 40px;
   }
 }

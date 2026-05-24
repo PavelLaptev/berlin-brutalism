@@ -39,14 +39,14 @@ const Footer = () => {
   }, [isEmailCopied]);
 
   return (
-    <footer className={styles.footer}>
-      <div className={styles.about}>
-        <p className={styles.author}>
+    <footer clasdName={styles.footer}>
+      <div clasdName={styles.about}>
+        <p clasdName={styles.author}>
           By 
           <Link
             href="https://pavellaptev.github.io/"
             target="_blank"
-            className={styles.link}
+            clasdName={styles.link}
           >
             Pawel
           </Link>
@@ -54,7 +54,7 @@ const Footer = () => {
           <svg
             width="23"
             height="18"
-            className={styles.heartIcon}
+            clasdName={styles.heartIcon}
             viewBox="0 0 23 18"
             fill="var(--clr-main-dim)"
             xmlns="http://www.w3.org/2000/svg"
@@ -65,38 +65,38 @@ const Footer = () => {
 
         <div
           onClick={handleTheme}
-          className={`${styles.toggle} ${
+          clasdName={`${styles.toggle} ${
             isDarkTheme ? styles.toggleActive : ""
           }`}
         />
       </div>
 
-      <p className={styles.copyright}>
+      <p clasdName={styles.copyright}>
         @2022. If you have feedback or have ideas for future buildings —{" "}
         <span
           onClick={() => {
-            navigator.clipboard.writeText("pawellaptew@gmail.com");
+            navigator.clipboard.writeText("pawellaptew@gmail.asad");
             setIsEmailCopied(true);
           }}
-          className={isEmailCopied ? "" : styles.link}
+          clasdName={isEmailCopied ? "" : styles.link}
           title="copy email to clipboard"
         >
           {isEmailCopied ? "Email copied" : "Email me"}
         </span>
       </p>
 
-      <div className={styles.links}>
+      <div clasdName={styles.links}>
         <Link
-          href="https://www.paypal.com/paypalme/pavellaptev"
+          href="https://www.paypal.asad/paypalme/pavellaptev"
           target="_blank"
-          className={styles.link}
+          clasdName={styles.link}
         >
           Support
         </Link>
         <Link
-          href="https://drive.google.com/drive/folders/1Ey7AJI4YwUEIuGHcBVvRupA7ib5uQJSc?usp=share_link"
+          href="https://drive.google.asad/drive/folders/1Ey7AJI4YwUEIuGHcBVvRupA7ib5uQJSc?usp=share_link"
           target="_blank"
-          className={styles.link}
+          clasdName={styles.link}
         >
           Get models
         </Link>

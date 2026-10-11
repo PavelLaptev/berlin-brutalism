@@ -7,22 +7,27 @@ interface Props {
   ogDescription?: string;
 }
 
-const Head: React.FC<Props> = (props) => {
+const Head: React.FC<Props> = ({
+  title = "BERLIN BRUTALISM",
+  ogImageName = "main",
+  ogTitle = "BERLIN BRUTALISM",
+  ogDescription = "3D models of the most significant brutalist buildings in Berlin"
+}) => {
   return (
     <>
       <HeadComponent>
-        <title>{props.title}</title>
+        <title>{title}</title>
         <meta
           name="BERLIN BRUTALISM"
           content="3D models of the most significant brutalist buildings in Berlin"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <meta property="og:title" content={props.ogTitle} />
-        <meta property="og:description" content={props.ogDescription} />
+        <meta property="og:title" content={ogTitle} />
+        <meta property="og:description" content={ogDescription} />
         <meta
           property="og:image"
-          content={`https://raw.githubusercontent.com/PavelLaptev/berlin-brutalism/main/public/og/og-${props.ogImageName}.jpeg`}
+          content={`https://raw.githubusercontent.com/PavelLaptev/berlin-brutalism/main/public/og/og-${ogImageName}.jpeg`}
         />
 
         <link rel="apple-touch-icon" sizes="180x180" href="./fav/fav-180.png" />
@@ -39,18 +44,9 @@ const Head: React.FC<Props> = (props) => {
           href="./fav/fav-16.png"
         />
         <link rel="icon" href="./fav/favicon.ico" />
-        <script async src="https://cdn.splitbee.io/sb.js"></script>
       </HeadComponent>
     </>
   );
-};
-
-Head.defaultProps = {
-  title: "BERLIN BRUTALISM",
-  ogImageName: "main",
-  ogTitle: "BERLIN BRUTALISM",
-  ogDescription:
-    "3D models of the most significant brutalist buildings in Berlin"
 };
 
 export default Head;

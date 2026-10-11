@@ -5,7 +5,7 @@ import * as THREE from "three";
 
 import Loader from "../Loader";
 import { useLoader } from "@react-three/fiber";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { Canvas } from "@react-three/fiber";
 
 import { OrbitControls, Environment } from "@react-three/drei";
@@ -42,10 +42,9 @@ const Scene: React.FC<ModelProps | any> = (props) => {
       </mesh>
       {props.model.showZeroPlane && (
         <mesh position={[0, 0, 0]} rotation={[(Math.PI / 180) * -90, 0, 0]}>
-          <planeBufferGeometry
+          <planeGeometry
             attach="geometry"
             args={[20, 20]}
-            rotation={[45, 0, 0]}
           />
         </mesh>
       )}
@@ -53,9 +52,34 @@ const Scene: React.FC<ModelProps | any> = (props) => {
   );
 };
 
+const Light: React.FC<LightProps> = (props) => {
+  const light = React.useRef<THREE.SpotLight>(null);
+
+  // Orbiting the camera doesn't change shadows, so the shadow map
+  // is only re-rendered when the light changes
+  React.useLayoutEffect(() => {
+    const spotLight = light.current;
+    if (!spotLight) return;
+
+    spotLight.shadow.autoUpdate = false;
+    spotLight.shadow.needsUpdate = true;
+  }, [props.angle, props.position, props.intensity]);
+
+  return (
+    <spotLight
+      ref={light}
+      angle={props.angle}
+      position={props.position}
+      color="#CDD1C9"
+      intensity={props.intensity * Math.PI}
+      decay={0}
+      castShadow
+    />
+  );
+};
+
 const GebaeudeCanvasFullscreen: React.FC<CanvasProps> = (props) => {
   const canvasRef = React.useRef(null) as any;
-  const light = React.useRef(null) as any;
   const [showControls, setShowControls] = React.useState(true);
   const [isDarkTheme, setIsDarkTheme] = React.useState(false);
   const [gebaeudeStates, setGebaeudeStates] = React.useState({
@@ -71,6 +95,8 @@ const GebaeudeCanvasFullscreen: React.FC<CanvasProps> = (props) => {
     const theme = localStorage.getItem("theme");
 
     if (theme === "dark") {
+      // localStorage is only available after hydration
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsDarkTheme(true);
     }
   }, []);
@@ -218,7 +244,10 @@ const GebaeudeCanvasFullscreen: React.FC<CanvasProps> = (props) => {
         className={styles.canvas}
         style={{ position: "absolute", width: "100%", height: "100%" }}
         camera={{ ...props.camera, fov: 5, near: 1, far: 1000 }}
-        shadows
+        shadows="percentage"
+        dpr={[1, 1.5]}
+        // Without autorotate, render only when the controls or light change
+        frameloop={gebaeudeStates.autorotate ? "always" : "demand"}
       >
         <OrbitControls
           makeDefault
@@ -230,16 +259,11 @@ const GebaeudeCanvasFullscreen: React.FC<CanvasProps> = (props) => {
           autoRotate={gebaeudeStates.autorotate}
           autoRotateSpeed={0.2}
         />
-        <Environment files="hdri/industrial_room.hdr" />
-        <spotLight
-          ref={light}
-          angle={gebaeudeStates.light.angle}
-          position={gebaeudeStates.light.position}
-          color="#CDD1C9"
-          intensity={gebaeudeStates.light.intensity}
-          castShadow
-        />
-        <Scene id={gebaeudeStates.id} model={gebaeudeStates.model} />
+        <React.Suspense fallback={null}>
+          <Environment files="hdri/industrial_room.hdr" />
+          <Light {...gebaeudeStates.light} />
+          <Scene id={gebaeudeStates.id} model={gebaeudeStates.model} />
+        </React.Suspense>
       </Canvas>
     </>
   );

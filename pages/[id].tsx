@@ -45,6 +45,7 @@ export default function Gebaeude(props: GebaeudeProps) {
             alt="Brutalismus Berlin Logo"
             width={40}
             height={45}
+            unoptimized
           />
         </Link>
 

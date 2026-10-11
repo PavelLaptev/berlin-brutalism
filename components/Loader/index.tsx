@@ -18,7 +18,7 @@ const centerPosition = {
   transform: "translate(-50%, -50%)"
 } as React.CSSProperties;
 
-const Loader: React.FC<Props> = (props) => {
+const Loader: React.FC<Props> = ({ position = "default" }) => {
   const { progress } = useProgress();
 
   // console.log(progress);
@@ -28,17 +28,13 @@ const Loader: React.FC<Props> = (props) => {
       <span
         className={styles.loader}
         style={{
-          ...(props.position === "default" ? defaultPosition : centerPosition)
+          ...(position === "default" ? defaultPosition : centerPosition)
         }}
       >
         {Math.round(progress)}%
       </span>
     </div>
   );
-};
-
-Loader.defaultProps = {
-  position: "default"
 };
 
 export default Loader;

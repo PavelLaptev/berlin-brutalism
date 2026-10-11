@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
       - name: Detect package manager
         id: detect-package-manager
         run: |
@@ -48,20 +48,15 @@ jobs:
             exit 1
           fi
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v5
         with:
-          node-version: "16"
+          node-version: "24"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
       - name: Setup Pages
-        uses: actions/configure-pages@v2
-        with:
-          # Automatically inject basePath in your Next.js configuration file and disable
-          # server side image optimization (https://nextjs.org/docs/api-reference/next/image#unoptimized).
-          #
-          # You may remove this line if you want to manage the configuration yourself.
-          static_site_generator: next
+        id: pages
+        uses: actions/configure-pages@v5
       - name: Restore cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             .next/cache
@@ -74,10 +69,11 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
-      - name: Static HTML export with Next.js
-        run: ${{ steps.detect-package-manager.outputs.runner }} next export
+        env:
+          # Static export (output: "export" in next.config.js) is served from this sub-path
+          PAGES_BASE_PATH: ${{ steps.pages.outputs.base_path }}
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ./out
 
@@ -91,4 +87,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4

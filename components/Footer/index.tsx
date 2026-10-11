@@ -11,6 +11,8 @@ const Footer = () => {
     const theme = localStorage.getItem("theme");
 
     if (theme === "dark") {
+      // localStorage is only available after hydration
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsDarkTheme(true);
     }
   }, []);
